@@ -16,6 +16,7 @@ services:
       - FSQ_CENTER_LAT=${FSQ_CENTER_LAT}
       - FSQ_CENTER_LON=${FSQ_CENTER_LON}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - JWT_SECRET=${JWT_SECRET}
     depends_on:
       - db
     restart: always

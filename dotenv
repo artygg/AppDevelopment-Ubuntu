@@ -12,3 +12,5 @@ DB_PORT=5432            # Port number for the database (default: 5432)
 
 PGADMIN_DEFAULT_EMAIL=test@goidaapp.com    # Default email for pgAdmin login
 PGADMIN_DEFAULT_PASSWORD=qwerty11213       # Default password for pgAdmin login
+
+JWT_SECRET = JWT_SECRET #JWTSECRET
