@@ -1,0 +1,14 @@
+FSQ_API_KEY=            # Your Foursquare API Key (string)
+FSQ_CENTER_LAT=         # Latitude for your app's center location (e.g., 40.7128)
+FSQ_CENTER_LON=         # Longitude for your app's center location (e.g., -74.0060)
+
+OPENAI_API_KEY=         # Your OpenAI API Key (string)
+
+DB_NAME=AppDev          # Name of your database (string)
+DB_USER=postgres        # Database user (string)
+DB_PASSWORD=1234        # Database password (string)
+DB_HOST=db              # Hostname for the database (use 'db' if using Docker Compose)
+DB_PORT=5432            # Port number for the database (default: 5432)
+
+PGADMIN_DEFAULT_EMAIL=test@goidaapp.com    # Default email for pgAdmin login
+PGADMIN_DEFAULT_PASSWORD=qwerty11213       # Default password for pgAdmin login

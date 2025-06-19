@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  golang:
+    build: ./app
+    container_name: golang-app
+    env_file:
+      - .env
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - FSQ_API_KEY=${FSQ_API_KEY}
+      - FSQ_CENTER_LAT=${FSQ_CENTER_LAT}
+      - FSQ_CENTER_LON=${FSQ_CENTER_LON}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:16
+    container_name: postgres-db
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    restart: always
+
+  nginx:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    environment:
+      - DISABLE_IPV6=true
+    volumes:
+      - nginx-data:/data
+      - nginx-letsencrypt:/etc/letsencrypt
+    restart: always
+
+volumes:
+  pgdata:
+  nginx-data:
+  nginx-letsencrypt:
